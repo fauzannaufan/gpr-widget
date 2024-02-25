@@ -1,0 +1,12 @@
+.DS_Store
+package-lock.json
+node_modules
+vendor
+sync/config.php
+sync/tmp
+public/build/
+config.js
+.idea
+public/src/data/latest
+public/src/data/covid-19/gpr.xml
+public/src/data/covid-19/gpr-all.xml

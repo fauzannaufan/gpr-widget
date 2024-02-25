@@ -1,0 +1,16 @@
+{
+  "name": "gpr-widget-kominfo",
+  "description": "webkominfo static rss widget viewer",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.1",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.3.3",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-string-replace": "^1.2.0",
+    "mocha": "^2.3.3"
+  }
+}
