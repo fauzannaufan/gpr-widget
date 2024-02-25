@@ -12,7 +12,7 @@
 
 #gpr-kominfo-widget-header {
     background-color: #23277B !important;
-    background-image: url("http://wbksrc/images/header-pemilu-2024.jpg");
+    background-image: url("http://localhost:5500/public/src/images/header-pemilu-2024.jpg");
     background-size: 100% 100% !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
@@ -23,7 +23,7 @@
 }
 
 #gpr-kominfo-widget-footer {
-    background-image: url("http://wbksrc/images/footer-pemilu-2024.jpg");
+    background-image: url("http://localhost:5500/public/src/images/footer-pemilu-2024.jpg");
     background-size: 100% 100% !important;
     background-repeat: no-repeat !important;
     background-position: top !important;
@@ -65,53 +65,53 @@ li.gpr-kominfo-widget-list-item {
 
 /* Class untuk mengganti icon tiap kategori */
 li.gpr-kominfo-widget-icon-rilis-media-gpr {
-    background: url("http://wbksrc/images/rilismediagpr.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/rilismediagpr.png") no-repeat left center;
       background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-artikel-berita-gpr {
-    background: url("http://wbksrc/images/artikelberitagpr.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/artikelberitagpr.png") no-repeat left center;
       background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-infografis-gpr {
-    background: url("http://wbksrc/images/infografisgpr.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/infografisgpr.png") no-repeat left center;
       background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-laporan-gpr {
-    background: url("http://wbksrc/images/laporangpr.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/laporangpr.png") no-repeat left center;
       background-size: 55px !important;
 }
 
 li.gpr-kominfo-widget-icon-lawan-covid-19 {
-    background: url("http://wbksrc/images/lawancovid19.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/lawancovid19.png") no-repeat left center;
     background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-hoaks {
-    background: url("http://wbksrc/images/hoaks.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/hoaks.png") no-repeat left center;
     background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-berita-pemerintahan {
-    background: url("http://wbksrc/images/beritapemerintahan.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/beritapemerintahan.png") no-repeat left center;
     background-size: 55px !important;
 }
 
 li.gpr-kominfo-widget-icon-artikel {
-    background: url("http://wbksrc/images/artikel.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/artikel.png") no-repeat left center;
     background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-infografis {
-    background: url("http://wbksrc/images/infografis.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/infografis.png") no-repeat left center;
     background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-rilis-media {
-    background: url("http://wbksrc/images/rilis-media.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/rilis-media.png") no-repeat left center;
     background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-berita-terkini {
-    background: url("http://wbksrc/images/berita-terkini.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/berita-terkini.png") no-repeat left center;
     background-size: 55px !important;
 }
 li.gpr-kominfo-widget-icon-debug-hoaks {
-    background: url("http://wbksrc/images/debug-hoaks.png") no-repeat left center;
+    background: url("http://localhost:5500/public/src/images/debug-hoaks.png") no-repeat left center;
     background-size: 55px !important;
 }
 

@@ -28,8 +28,8 @@ module.exports = function(grunt) {
       },
       build: {
         src: [
-            'public/src/jquery-2.1.4.js',
-            'public/src/es6-promise.js',
+            // 'public/src/jquery-2.1.4.js',
+            // 'public/src/es6-promise.js',
             'public/src/<%= pkg.name %>.js'
         ],
         dest: 'public/build/<%= pkg.name %>.min.js'

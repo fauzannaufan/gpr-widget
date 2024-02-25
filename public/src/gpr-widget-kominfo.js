@@ -1,8 +1,7 @@
 (function() {
-    var Q = jQuery.noConflict(true);
     var base = '#gpr-kominfo-widget-container';
-    var customCssUrl = 'http://wbksrc/gpr-widget-kominfo.css?v=20232910';
-    var dataUrl = 'http://wbksrc/data/covid-19/gpr.xml';
+    var customCssUrl = 'http://localhost:5500/public/src/gpr-widget-kominfo.css?v=20232910';
+    var dataUrl = 'http://localhost:5500/public/src/data/covid-19/gpr.xml';
     var MAXITEMS = 10;
     var attrName = {
         headerId: 'gpr-kominfo-widget-header',
@@ -37,38 +36,39 @@
    };
 
     var showLoad = function() {
-        Q('#' + attrName.bodyId).html('Loading...');
+        var body = document.querySelector('#' + attrName.bodyId);
+        if (body) body.innerHTML = 'Loading...';
     };
 
     var hideLoad = function() {
-        Q('#' + attrName.bodyId).html('');
+        var body = document.querySelector('#' + attrName.bodyId);
+        if (body) body.innerHTML = '';
     }
 
     var printCssError = function() {
         console.log('[widget-kominfo]', 'UI not loaded');
-        Q(base).html('Something went wrong. Please refresh this page');
+        document.querySelector(base).innerHTML = 'Something went wrong. Please refresh this page';
     };
 
     var loadCss = function(url) {
         return new Promise(function(resolve, reject) {
-            Q.ajax(url, {
-                type: 'GET',
-                crossDomain: true
-            })
-                .done(resolve)
-                .fail(reject);
+            fetch(url, {mode:'cors'})
+                .then(function(response) {
+                    return response.text()
+                })
+                .then(resolve).catch(reject)
         });
     };
 
     var loadDisplay = function(fromLoadCss) {
         return new Promise(function(resolve, reject) {
+            var style = document.createElement('style');
+            style.innerHTML = fromLoadCss;
+            document.head.appendChild(style);
 
-            Q('<style>').html(fromLoadCss)
-                .appendTo('head');
-
-            Q(base).append('<div id="' + attrName.headerId + '"></div>');
-            Q(base).append('<div id="' + attrName.bodyId + '"></div>');
-            Q(base).append('<div id="' + attrName.footerId + '"></div>');
+            document.querySelector(base).insertAdjacentHTML('beforeend','<div id="' + attrName.headerId + '"></div>');
+            document.querySelector(base).insertAdjacentHTML('beforeend','<div id="' + attrName.bodyId + '"></div>');
+            document.querySelector(base).insertAdjacentHTML('beforeend','<div id="' + attrName.footerId + '"></div>');
 
             resolve('sukses');
         });
@@ -76,45 +76,47 @@
 
     var loadDisplayFailed = function() {
         console.log('[widget-kominfo]', 'Failed to render');
-        Q(base).html('Something went wrong. Please refresh this page');
+        document.querySelector(base).innerHTML = 'Something went wrong. Please refresh this page';
     }
 
     var loadRss = function(fromDisplay) {
         showLoad();
 
         return new Promise(function(resolve, reject) {
-            Q.ajax(dataUrl, {
-                type: 'GET',
-                crossDomain: true
-            })
-                .done(resolve)
-                .fail(reject);
+            fetch(dataUrl, {mode:'cors'})
+                .then(function(response) {
+                    return response.text()
+                })
+                .then(resolve).catch(reject)
         });
     }
 
     var loadDataFail = function() {
         hideLoad();
         console.log('[widget-kominfo]', 'Data not loaded');
-        Q(base).html('Something went wrong. Please refresh this page');
+        document.querySelector(base).innerHTML = 'Something went wrong. Please refresh this page';
     };
+
+    var getValue = function(item, key) {
+        return item.getElementsByTagName(key)[0].childNodes[0].nodeValue
+    }
 
     var loadFinish = function(fromRss) {
         hideLoad();
-        var items = Q(fromRss).find('item');
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(fromRss,"text/xml");
+        var items = xmlDoc.getElementsByTagName('item');
 
-        Q('#' + attrName.bodyId).append('<ul id="' + attrName.ulId + '"></ul>')
+        document.querySelector('#' + attrName.bodyId).insertAdjacentHTML('beforeend','<ul id="' + attrName.ulId + '"></ul>')
 
         for(i = 0; i < MAXITEMS; i++) {
-            var title = Q(items[i]).find('title').text();
-            var link = Q(items[i]).find('link').text();
-            var desc = Q(items[i]).find('description').text();
-            var pubDate = Q(items[i]).find('pubDate').text();
-            var category = Q(items[i]).find('category').text();
-            var author = Q(items[i]).find('author').text();
-            var categoryIcon = Q(items[i]).find('icon_class').text();
-            var categoryTitle = Q(items[i]).find('category_title').text();
+            var title = getValue(items[i],'title');
+            var link = getValue(items[i],'link');
+            var pubDate = getValue(items[i],'pubDate');
+            var categoryIcon = getValue(items[i],'icon_class');
+            var categoryTitle = getValue(items[i],'category_title');
 
-            Q('#' + attrName.ulId).append('<li class="' + attrName.itemClass
+            document.querySelector('#' + attrName.ulId).insertAdjacentHTML('beforeend','<li class="' + attrName.itemClass
                 + ' ' + categoryIcon + '">'
                 + '<small class="gpr-kominfo-align-left"><b>'
                      + categoryTitle.replace(" GPR", "") + '</b></small>'
@@ -129,7 +131,7 @@
         }
     }
 
-    Q(document).ready(function() {
+    document.addEventListener("DOMContentLoaded", function(event) {
         loadCss(customCssUrl).catch(printCssError)
             .then(loadDisplay).catch(loadDisplayFailed)
             .then(loadRss).catch(loadDataFail)
