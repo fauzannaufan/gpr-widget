@@ -131,10 +131,18 @@
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function(event) {
+    var init = function() {
         loadCss(customCssUrl).catch(printCssError)
             .then(loadDisplay).catch(loadDisplayFailed)
             .then(loadRss).catch(loadDataFail)
             .then(loadFinish);
-    });
+    }
+
+    if (document.readyState === 'complete') {
+        init();
+    } else {
+        document.addEventListener("DOMContentLoaded", function(event) {
+            init();
+        });
+    }
 })();
