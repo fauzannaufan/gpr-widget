@@ -2,7 +2,7 @@ FROM composer:latest as COMPOSER
 
 FROM php:latest as PHP
 COPY --from=COMPOSER /usr/bin/composer /usr/bin/composer
-
+RUN apt-get update && apt-get install -y zip unzip
 RUN mkdir -p /usr/local/content/node
 WORKDIR /usr/local/content/node
 ADD https://nodejs.org/dist/v18.16.1/node-v18.16.1-linux-x64.tar.gz .
@@ -20,6 +20,7 @@ RUN cp config.dev.js config.js
 RUN cp sync/config.dev.php sync/config.php
 RUN npm i -d && composer install
 RUN /usr/local/content/node/node-v18.16.1-linux-x64/bin/grunt
+RUN cd sync && php run.php
 
 FROM nginx:latest
 RUN mkdir -p /usr/local/content/app
